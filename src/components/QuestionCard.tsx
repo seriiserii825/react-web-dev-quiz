@@ -7,5 +7,5 @@ interface Props {
 
 export const QuestionCard: React.FC<Props> = ({ data }) => {
   const { question, options, answer } = data;
-  return <div>some</div>;
+  return <div>{question}</div>;
 };

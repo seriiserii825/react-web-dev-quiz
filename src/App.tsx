@@ -2,6 +2,7 @@ import { useState } from "react";
 import { QuestionCard } from "./components/QuestionCard";
 import { questions } from "./data/questions";
 import { Finished } from "./components/Finished";
+import ReactConfetti from "react-confetti";
 
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
@@ -35,6 +36,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-900 px-4 text-white flex items-center justify-center flex-col">
+      {isFinished && score === questions.length && <ReactConfetti />}
       {isFinished ? (
         <Finished total={questions.length} answered={score} />
       ) : (

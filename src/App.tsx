@@ -19,6 +19,19 @@ function App() {
       setScore(score + 1);
     }
   }
+
+  const isLastQuestion = currentQuestion === questions.length - 1;
+
+  function goToNextQuestion() {
+    if (!isLastQuestion) {
+      setCurrentQuestion(currentQuestion + 1);
+      setSelectedAnswer(null);
+      setWasSelected(false);
+    } else {
+      setIsFinished(true);
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-900 px-4 text-white flex items-center justify-center flex-col">
       <div className="text-center">
@@ -29,7 +42,18 @@ function App() {
           data={questions[currentQuestion]}
           wasSelected={wasSelected}
           onAnswer={handleAnswer}
+          selected={selectedAnswer}
+          currentQuestionIndex={currentQuestion + 1}
+          totalQuestionsLength={questions.length}
         />
+        {wasSelected && (
+          <button
+            className="mt-4 bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+            onClick={goToNextQuestion}
+          >
+            {isLastQuestion ? "See result" : "Next Question"}
+          </button>
+        )}
       </div>
     </div>
   );
